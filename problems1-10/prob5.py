@@ -25,9 +25,10 @@ def lcm(n):
         #make a local count
         for key in list(pf.keys()):
             if key in list(distinct_factors.keys()):
-                distinct_factors[key]+=1
+               if pf[key]>=distinct_factors[key]:
+                   distinct_factors[key]=pf[key] #this is wrong
             else:
-                distinct_factors[key]=1
+                   distinct_factors[key]=1
     
     print(distinct_factors)
     
@@ -53,4 +54,4 @@ def prime_factorization(number):
     
 if __name__=="__main__":
 #    print(prime_factorization(2*2*3*5*7))
-    print(lcm(10))
+    print("the smallest positive number that is evenly divisible by all of the numbers from 1 to 20 is ",lcm(20))
