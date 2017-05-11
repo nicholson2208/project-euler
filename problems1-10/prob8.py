@@ -32,6 +32,9 @@ The four adjacent digits in the 1000-digit number that have the greatest product
 
 Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?
 """
+import functools
+
+stupid_big_number=7316717653133062491922511967442657474235534919493496983520312774506326239578318016984801869478851843858615607891129494954595017379583319528532088055111254069874715852386305071569329096329522744304355766896648950445244523161731856403098711121722383113622298934233803081353362766142828064444866452387493035890729629049156044077239071381051585930796086670172427121883998797908792274921901699720888093776657273330010533678812202354218097512545405947522435258490771167055601360483958644670632441572215539753697817977846174064955149290862569321978468622482839722413756570560574902614079729686524145351004748216637048440319989000889524345065854122758866688116427171479924442928230863465674813919123162824586178664583591245665294765456828489128831426076900422421902267105562632111110937054421750694165896040807198403850962455444362981230987879927244284909188845801561660979191338754992005240636899125607176060588611646710940507754100225698315520005593572972571636269561882670428252483600823257530420752963450
 
 def maxAdjProd(num, run_len): #I'm going to try a brute force way first and then I am going to be clever
 #TODO: make this general to run length
@@ -43,25 +46,24 @@ def maxAdjProd(num, run_len): #I'm going to try a brute force way first and then
         num_list.append(int(c))
     
     #now get an initial guess about the consecutive nums     
-    consec_nums=[]
+    best=[]
     
     iter=0
     max_prod=0
     
-    while iter < len(num_list)-1: #run_len        
-        n1=num_list[0+iter]
-        n2=num_list[1+iter]
+    while iter < len(num_list)-run_len+1: #run_len        
+        nums=[]
+        for x in range(run_len):
+            nums.append(num_list[x+iter])
         
         iter+=1
-        prod=n1*n2
+        prod=functools.reduce(lambda x, y: x*y, nums)
         
         if prod>max_prod:
             max_prod=prod
-            consec_nums=[n1, n2]
-        
-        
+            best=nums   
     
-    return consec_nums
+    return best
     
 if __name__=="__main__":
-    print(maxAdjProd(91919912323,2))
+    print(maxAdjProd(stupid_big_number,13))
