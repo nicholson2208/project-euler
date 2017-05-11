@@ -34,19 +34,34 @@ Find the thirteen adjacent digits in the 1000-digit number that have the greates
 """
 
 def maxAdjProd(num, run_len): #I'm going to try a brute force way first and then I am going to be clever
+#TODO: make this general to run length
+
     #first need to turn num into an array of digits
     s=str(num)
     num_list=[]
     for c in s:
         num_list.append(int(c))
     
-    #now get an initial guess about the consecutive nums
+    #now get an initial guess about the consecutive nums     
     consec_nums=[]
     
+    iter=0
+    max_prod=0
     
-
+    while iter < len(num_list)-1: #run_len        
+        n1=num_list[0+iter]
+        n2=num_list[1+iter]
+        
+        iter+=1
+        prod=n1*n2
+        
+        if prod>max_prod:
+            max_prod=prod
+            consec_nums=[n1, n2]
+        
+        
     
     return consec_nums
     
 if __name__=="__main__":
-    maxAdjProd(123456,2)
+    print(maxAdjProd(91919912323,2))
