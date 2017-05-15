@@ -34,17 +34,50 @@ The product of these numbers is 26 × 63 × 78 × 14 = 1788696.
 What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20×20 grid?
 """
 import time
+import functools
+#import numpy as np
 
-small_grid=[[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]]
+small_grid=[[1,2,3,4,3],[5,6,7,8,2],[9,10,11,17,43],[13,14,15,16,23],[13,14,15,16,12]]
 def greatestProdInGrid(grid,n):
 #    Exception("not yet implemented")
     nums=[]
-    return nums
+    best=0
+    best_nums=[]
+    for row in range(len(grid)):
+#        rdiag=[]
+        for col in range(len(grid[row])):
+            #best thing horizontally
+            prod=0
+            if col <= len(grid)-n:
+                nums=grid[row][col:col+n]
+                prod=functools.reduce(lambda x, y: x*y,nums )
+            
+                if prod>best:
+                    best=prod
+                    best_nums=nums
+                
+            #best thing vertically
+            if row <= len(grid)-n:
+                nums=[item[col] for item in grid[row:row+n]]
+                prod=functools.reduce(lambda x, y: x*y,nums )
+            
+                if prod>best:
+                    best=prod
+                    best_nums=nums
+                
+                #down diag to the right
+#                if col <= len(grid)-n:
+#                    nums= 
+               
+        
+        
+        
+    return best_nums
 
 
 if __name__=="__main__":
     start = time.clock()
-    print(greatestProdInGrid(small_grid,2))
+    print(greatestProdInGrid(small_grid,3))
 
     time_it_took=(time.clock()-start)
     print("This way of solving the problem took "+str(time_it_took*1000)+" milliseconds")
