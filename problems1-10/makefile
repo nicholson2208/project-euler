@@ -1,4 +1,4 @@
-cppo = prob7.o
+cppo = prob8.o
 objects = $(cppo)
 sources= $(objects:.o=.cpp)
 Output=Probs
