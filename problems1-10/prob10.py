@@ -31,4 +31,4 @@ def sumPrimes(n):
                 
 if __name__=="__main__":
     print(sumPrimes(10))
-    print(sumPrimes(2000000))
+#    print(sumPrimes(2000000))
